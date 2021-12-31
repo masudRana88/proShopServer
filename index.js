@@ -3,6 +3,7 @@ import cors from "cors"
 import connectDB from "./config/db.js"
 import dotenv from "dotenv"
 import productsRoutes from "./routes/productsRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
@@ -18,13 +19,8 @@ app.get('/', (req, res) => {
 
 // Get products
 app.use('/api/products', productsRoutes)
+app.use('/api', userRoutes)
 
-
-// app.get("/api/products/:id", (req, res) => {
-//     const id = req.params.id
-//     const product = products.find(p => p._id === id)
-//     res.send(product)
-// })
 
 app.listen(port, () => {
     console.log("Running server on port", port)

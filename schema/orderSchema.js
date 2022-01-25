@@ -7,7 +7,7 @@ const orderSchema = mongoose.Schema({
     orderItem: [
         {
             name : {type: String, required: true},
-            qtn : {type: Number},
+            qty : {type: Number},
             price : {type: Number, required: true},
             image : {type: String, required: true},
             product: {
@@ -23,10 +23,13 @@ const orderSchema = mongoose.Schema({
        zip : {type: String, required: true},
        country : {type: String, required: true}
     },
-    prementMethod: {
+    shippingPrice: {
+        type: Number    
+    },
+    paymentMethod: {
         type: String,
     },
-    prementResult: {
+    paymentResult: {
         id: {type: String, require: true},
         status : { type : String, require: true},
         update_time : { type : String, require: true},

@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import  {addOrder,getOrderById,updateOrderToPay}  from "../routesControler/OrderControler.js";
+import  {addOrder,getOrderById,updateOrderToPay,getOrderbyUserId}  from "../routesControler/OrderControler.js";
 import {privateRoutes} from "../Hookes/privateRoutes.js"
 import cors from "cors"
 
@@ -10,16 +10,22 @@ import cors from "cors"
 // post request
 router.route('/').post(privateRoutes, addOrder)
 
-// @ Get Product By Id
+// @ Get Order By Id
 // @ Private routes
-// api/product/id
+// api/order/id
 // get request
 router.route('/:id').get(privateRoutes,getOrderById)
+
+// @ Get ALL Order By user id
+// @ Private routes
+// api/order/user
+// get request
+router.route('/:id/user').get(privateRoutes,getOrderbyUserId)
 
 
 // @ Update Order to pay
 // @ Private routes
-// api/product/:id/pay
+// api/order/:id/pay
 // Put request
 router.route('/pay/:id').put(updateOrderToPay);
 

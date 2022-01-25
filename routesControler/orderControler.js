@@ -63,6 +63,22 @@ const updateOrderToPay = asyncHandler(async (req, res) => {
     }
 })
 
+
+// @ Get ALL Order By user id
+// @ Private routes
+// api/order/user
+// get request
+const getOrderbyUserId = asyncHandler(async (req,res) => {
+    const userId = req.body.user._id;
+    const order = await Order.find({ userId })
+    if (order.length > 0) {
+        res.send(order)
+    }
+    else {
+        res.send({})
+    }
+})
+
 export {
-    addOrder,getOrderById,updateOrderToPay
+    addOrder,getOrderById,updateOrderToPay,getOrderbyUserId
 }

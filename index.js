@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 // Get products
 app.use('/api/products', productsRoutes)
 //user Routs
-app.use('/api', userRoutes)
+app.use('/api/user', userRoutes)
 // order routs
 app.use('/api/order', orderRouts)
 

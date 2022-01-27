@@ -17,3 +17,14 @@ export const privateRoutes = asyncHandler(async (req, res, next) => {
         throw new Error("Unathorize Access")
     }
 })
+
+export const adminRoutes = asyncHandler(async(req, res,next) => {
+    const user = req.user
+    if (user.isAdmin) {
+        nest()
+    }
+    else {
+        res.status(401)
+        throw new Error("Unathorize Access")
+    }
+})

@@ -80,6 +80,20 @@ const userResister = asyncHandler(async (req, res) => {
     }
 })
 
+// @ get request
+// @ GET request
+// Private and Adnin routes 
+const getUserList = asyncHandler(async (req, res) => {
+    const users = await User.find({}).select("-password")
+    if (users) {
+        res.send(users)
+    }
+    else {
+        res.status(404)
+        throw new Error("User is not found!")
+    }
+})
+
 // @ get User
 // @ Private Route
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -119,5 +133,5 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 })
 export {
-    userLogin,getUserProfile,userResister,updateUserProfile
+    userLogin,getUserProfile,userResister,updateUserProfile,getUserList
 }

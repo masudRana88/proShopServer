@@ -20,7 +20,7 @@ router.route('/:id').get(privateRoutes,getOrderById)
 // @ Private routes
 // api/order/user
 // get request
-router.route('/:id/user').get(privateRoutes,getOrderbyUserId)
+router.route('/user/order').get(privateRoutes,getOrderbyUserId)
 
 
 // @ Update Order to pay

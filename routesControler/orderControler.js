@@ -69,14 +69,10 @@ const updateOrderToPay = asyncHandler(async (req, res) => {
 // api/order/user
 // get request
 const getOrderbyUserId = asyncHandler(async (req,res) => {
-    const userId = req.body.user._id;
-    const order = await Order.find({ userId })
-    if (order.length > 0) {
-        res.send(order)
-    }
-    else {
-        res.send({})
-    }
+    const userId = req.user.id
+    const order = await Order.find({ user: userId })
+    console.log("user order")
+    res.send(order)
 })
 
 export {

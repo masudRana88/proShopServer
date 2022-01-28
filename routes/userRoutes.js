@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {userLogin,userResister,getUserProfile,updateUserProfile, getUserList} from "../routesControler/userControler.js"
+import {userLogin,userResister,getUserProfile,updateUserProfile, getUserList,deleteUser} from "../routesControler/userControler.js"
 import {privateRoutes,adminRoutes} from "../Hookes/privateRoutes.js"
 
 // get user
@@ -13,7 +13,12 @@ router.route("/register").post(userResister)
 // @ get request
 // @ GET request /api/user
 // Private and Adnin routes 
-router.route("/").get(privateRoutes,adminRoutes,getUserList)
+router.route("/").get(privateRoutes, adminRoutes, getUserList)
+
+// @ get request
+// @ GET request /api/user/:id
+// Private and Adnin routes 
+router.route("/:id").get(privateRoutes, adminRoutes, deleteUser)
 
 // get user profile
 // private routes

@@ -108,11 +108,31 @@ const getUserProfile = asyncHandler(async (req, res) => {
     })
 })
 
+// @ DELET User
+// @ Private Routes and Admin Routes
+const deleteUser = asyncHandler(async (req, res) => {
+    const userId = req.params.id
+    // Chaking user
+    const userFind = await User.findById({ _id: userId })
+    if(userFind === null){
+        res.status(400).send("user is not found !!")
+        throw new Error("user is nor found for delete")
+    }
+    // Delete user
+    if (userFind&& userId) {
+        const deleteUser = await User.deleteOne({ _id: userId })
+        if (deleteUser.deletedCount === 1) {
+            const users = await User.find({}).select("-password")
+
+            res.send(users)
+        }
+    }
+    
+})
 
 // @ Upgate User
 // Private Route
 const updateUserProfile = asyncHandler(async (req, res) => {
-    console.log("dispach")
     const user = await User.findById(req.user.id)
     if (user) {
         user.name = req.body.name || user.name;
@@ -133,5 +153,5 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 })
 export {
-    userLogin,getUserProfile,userResister,updateUserProfile,getUserList
+    userLogin,getUserProfile,userResister,updateUserProfile,getUserList,deleteUser
 }

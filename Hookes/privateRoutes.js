@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import jwt from "jsonwebtoken";
+import User from '../schema/userSchema.js';
 
 export const privateRoutes = asyncHandler(async (req, res, next) => {
     try {
@@ -19,9 +20,10 @@ export const privateRoutes = asyncHandler(async (req, res, next) => {
 })
 
 export const adminRoutes = asyncHandler(async(req, res,next) => {
-    const user = req.user
+    
+    const user = await User.findById(req.user.id)
     if (user.isAdmin) {
-        nest()
+        next()
     }
     else {
         res.status(401)

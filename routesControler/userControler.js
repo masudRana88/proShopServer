@@ -152,6 +152,22 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
 })
+const editUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+    console.log(req.body)
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin;
+        await user.save()
+        const users = await User.find({})
+        res.send(users)
+    }
+    else {
+        res.status(400)
+        throw new Error("user is not found for Edit")
+    }
+})
 export {
-    userLogin,getUserProfile,userResister,updateUserProfile,getUserList,deleteUser
+    userLogin,getUserProfile,userResister,updateUserProfile,getUserList,deleteUser,editUserProfile
 }

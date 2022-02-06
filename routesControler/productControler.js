@@ -1,9 +1,25 @@
 import Product from "../schema/productsSchema.js";
 import asyncHandler from 'express-async-handler'
-import fs from "fs"
-import console from "console";
+
 const getProduct = asyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const productsList = await Product.find({});
+        const productCount = productsList.length
+    const page = Number(req.query.page)
+    const size = Number(req.query.size)
+    
+    if (page || size) {
+        const skip = (page-1)* size
+        const limitedProduct = await Product.find({}).skip(skip).limit(size)
+        
+        res.send({productCount,limitedProduct})
+    } else {
+        res.send({productCount,productsList})
+    }
+})
+
+// get top product 
+const getTopProduct = asyncHandler(async (req, res) => {
+    const products = await Product.find({}).sort({rating: -1}).limit(3)
     res.send(products)
 })
 
@@ -78,5 +94,5 @@ const deleteProduct = asyncHandler(async (req, res) => {
 })
 
 export {
-    getProduct,getProductById,addProduct,deleteProduct,updateProduct
+    getProduct,getProductById,addProduct,deleteProduct,updateProduct,getTopProduct
 }

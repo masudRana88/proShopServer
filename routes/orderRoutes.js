@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
-import  {addOrder,getOrderById,updateOrderToPay,getOrderbyUserId}  from "../routesControler/OrderControler.js";
-import {privateRoutes} from "../Hookes/privateRoutes.js"
+import  {addOrder,getOrderById,updateOrderToPay,getOrderbyUserId,getAllOrder,updateOrderToDeleverd,deleteOrder}  from "../routesControler/OrderControler.js";
+import {adminRoutes, privateRoutes} from "../Hookes/privateRoutes.js"
 import cors from "cors"
 
 // @ Add Product
@@ -18,15 +18,35 @@ router.route('/:id').get(privateRoutes,getOrderById)
 
 // @ Get ALL Order By user id
 // @ Private routes
-// api/order/user
+// api/order/user/order
 // get request
 router.route('/user/order').get(privateRoutes,getOrderbyUserId)
 
+// @ Get ALL Order 
+// @ Private routes and admin routs
+// api/order/admin/order/
+// get request
+router.route('/admin/order').get(privateRoutes,adminRoutes,getAllOrder)
+
+
+// @ Update Order to deleverd
+// @ Private routes And admin routs
+// api/order/deleverd/:id
+// Put request
+router.route('/deleverd/').put(privateRoutes, adminRoutes, updateOrderToDeleverd);
+
+// @ Order delete
+// @ Private routes And admin routs
+// api/order/delete/
+// Put request
+router.route('/delete/:id').delete(deleteOrder);
 
 // @ Update Order to pay
 // @ Private routes
 // api/order/:id/pay
 // Put request
-router.route('/pay/:id').put(updateOrderToPay);
+router.route('/pay/:id').put(privateRoutes,updateOrderToPay);
+
+
 
 export default router;

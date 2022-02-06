@@ -5,7 +5,7 @@ import { generateJwt } from "../Hookes/generateJwt.js";
 
 // @ Login User
 const userLogin = asyncHandler(async (req, res) => {
-    console.log(req.body)
+    
     const { email, password } = req.body
     const pass = password
     const findUser = await User.findOne({ email })
@@ -98,7 +98,7 @@ const getUserList = asyncHandler(async (req, res) => {
 // @ Private Route
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user.id)
-    console.log(user)
+    
     res.send({
         name: user.name,
         email: user.email,

@@ -1,11 +1,13 @@
 import express from "express";
 const router = express.Router();
-import { getProduct, getProductById, addProduct,deleteProduct ,updateProduct} from "../routesControler/productControler.js"
+import { getProduct, getProductById, addProduct,deleteProduct ,updateProduct,getTopProduct} from "../routesControler/productControler.js"
 import {privateRoutes,adminRoutes} from "../Hookes/privateRoutes.js"
 
 // @ Get product
 // @ public routes
 router.route('/').get(getProduct)
+
+router.route('/top').get(getTopProduct)
 
 // @ Get product by ID
 router.route("/:id").get(getProductById)

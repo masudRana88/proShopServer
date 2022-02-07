@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import  {addOrder,getOrderById,updateOrderToPay,getOrderbyUserId,getAllOrder,updateOrderToDeleverd,deleteOrder}  from "../routesControler/OrderControler.js";
+import  {addOrder,getOrderById,updateOrderToPay,getOrderbyUserId,getAllOrder,updateOrderToDeleverd,deleteOrder}  from "../routesControler/OrderControler";
 import {adminRoutes, privateRoutes} from "../Hookes/privateRoutes.js"
 import cors from "cors"
 
